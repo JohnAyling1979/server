@@ -51,6 +51,7 @@ class Player {
                 if (this.x > 590) {
                     this.x = 590;
                 }
+                break;
             case ' ':
                 this.fire();
                 break;
@@ -58,7 +59,7 @@ class Player {
     }
 
     fire() {
-        switch(this.direction) {
+        switch (this.direction) {
             case 'n':
                 Object.keys(players).forEach(uuid => {
                     if (players[uuid].hp > 0 && this.y > players[uuid].y && this.x === players[uuid].x) {
@@ -66,6 +67,31 @@ class Player {
                         players[uuid].hp -= this.attack;
                     }
                 });
+                break;
+            case 's':
+                Object.keys(players).forEach(uuid => {
+                    if (players[uuid].hp > 0 && this.y < players[uuid].y && this.x === players[uuid].x) {
+                        this.score++;
+                        players[uuid].hp -= this.attack;
+                    }
+                });
+                break;
+            case 'e':
+                Object.keys(players).forEach(uuid => {
+                    if (players[uuid].hp > 0 && this.x < players[uuid].x && this.y === players[uuid].y) {
+                        this.score++;
+                        players[uuid].hp -= this.attack;
+                    }
+                });
+                break;
+            case 'w':
+                Object.keys(players).forEach(uuid => {
+                    if (players[uuid].hp > 0 && this.x > players[uuid].x && this.y === players[uuid].y) {
+                        this.score++;
+                        players[uuid].hp -= this.attack;
+                    }
+                });
+                break;
         }
     }
 }
