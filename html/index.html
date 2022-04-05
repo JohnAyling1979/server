@@ -37,6 +37,15 @@
       left: 165px;
       display: none;
     }
+
+    .leader {
+      color: gold;
+      font-size: 16px;
+      position: absolute;
+      top: 10px;
+      left: 540px;
+      display: none;
+    }
   </style>
 </head>
 
@@ -45,6 +54,7 @@
     <div class="canvas">
       <canvas id="canvas" height="400" width="600"></canvas>
       <div id="gameover" class="gameover">Game Over</div>
+      <div id="leader" class="leader">Leader</div>
     </div>
     <div class="stats">
       <div>
@@ -68,17 +78,20 @@
   <script>
     const socket = io();
     const canvas = document.getElementById('canvas');
+    const score = document.getElementById('score');
     const hp = document.getElementById('hp');
     const attack = document.getElementById('attack');
     const defense = document.getElementById('defense');
     const color = document.getElementById('color');
     const gameover = document.getElementById('gameover');
+    const leader = document.getElementById('leader');
+
     const ctx = canvas.getContext('2d');
     let dead = false;
     let id = null;
     let you = null;
     let key = null;
-    let players = [];
+    let players = {};
 
     socket.on('players', function (serverPlayers) {
       id = socket.id;
@@ -100,6 +113,11 @@
         attack.innerHTML = you.attack;
         defense.innerHTML = you.defense;
         color.style.backgroundColor = you.color;
+        if (you.top) {
+          leader.style.display = 'block';
+        } else {
+          leader.style.display = 'none';
+        }
       }
     }
 

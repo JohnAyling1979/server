@@ -19,6 +19,7 @@ class Player {
         this.color = `rgb(${getRandomInt(50, 205)}, ${getRandomInt(50, 205)}, ${getRandomInt(50, 205)})`;
         this.x = getRandomInt(0, 59) * 10;
         this.y = getRandomInt(0, 39) * 10;
+        this.top = false;
     }
 
     input(direction) {
@@ -110,8 +111,24 @@ io.on('connection', (socket) => {
 
     io.emit('players', players);
 
-    socket.on('input', (direction) => {
-        players[id].input(direction);
+    socket.on('input', (input) => {
+        players[id].input(input);
+
+        let top = null;
+        Object.keys(players).forEach(playerId => {
+            players[playerId].top = false;
+
+            if (top === null && players[playerId].score > 0) {
+                top = playerId;
+            } else if (players[playerId] > players[top]) {
+                top = playerId;
+            }
+        });
+
+        if (top) {
+            players[top].top = true;
+        }
+
         io.emit('players', players);
     });
 
