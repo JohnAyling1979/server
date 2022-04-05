@@ -9,6 +9,14 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/html/index.html');
 });
 
+app.get('/index.css', (req, res) => {
+    res.sendFile(__dirname + '/html/index.css');
+});
+
+app.get('/index.js', (req, res) => {
+    res.sendFile(__dirname + '/html/index.js');
+});
+
 class Player {
     constructor() {
         this.hp = 10;

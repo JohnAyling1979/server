@@ -1,0 +1,42 @@
+body {
+	margin: 0;
+	padding: 0;
+}
+
+.row {
+	width: 100vw;
+	display: flex;
+}
+
+.canvas {
+	position: relative;
+	flex: 75%;
+}
+
+.stats {
+	flex: 25%;
+}
+
+#color {
+	width: 12px;
+	height: 12px;
+	display: inline-block;
+}
+
+.gameover {
+	color: red;
+	font-size: 50px;
+	position: absolute;
+	top: 100px;
+	left: 165px;
+	display: none;
+}
+
+.leader {
+	color: gold;
+	font-size: 16px;
+	position: absolute;
+	top: 10px;
+	left: 540px;
+	display: none;
+}
