@@ -1,7 +1,7 @@
 {
-  "name": "server",
+  "name": "socket_war",
   "version": "1.0.0",
-  "description": "Socket server",
+  "description": "Socket server game",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",
